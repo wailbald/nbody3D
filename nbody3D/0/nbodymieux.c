@@ -82,7 +82,6 @@ void move_particles(particle_t *p, const f32 dt, u64 n)
       p->y[i] += dt * p->vy[i];
       p->z[i] += dt * p->vz[i];
     }
-    printf("val = %lf\n",p->x[0]); 
 }
 
 //

@@ -75,7 +75,6 @@ void move_particles(particle_t *p, const f32 dt, u64 n)
       p->vy[i] += dt * fy; //21
       p->vz[i] += dt * fz; //23
     }
-    printf("vit = %lf\n",p->vx[0]);
 
   //3 floating-point operations
   for (u64 i = 0; i < n; i++)
@@ -83,8 +82,7 @@ void move_particles(particle_t *p, const f32 dt, u64 n)
       p->x[i] += dt * p->vx[i];
       p->y[i] += dt * p->vy[i];
       p->z[i] += dt * p->vz[i];
-    }
-    printf("val = %lf\n",p->x[0]); 
+    } 
 }
 
 //

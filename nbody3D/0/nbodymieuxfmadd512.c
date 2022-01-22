@@ -143,7 +143,6 @@ void move_particles(particle_t *p, f32 dt, u64 n)
     _mm512_storeu_ps(p->vy+i,vy);
     _mm512_storeu_ps(p->vz+i,vz);
   }
-  printf("vit = %lf\n",p->vx[0]);
 
   //3 floating-point operations
   for (u64 i = 0; i < n; i+=8)
@@ -164,7 +163,7 @@ void move_particles(particle_t *p, f32 dt, u64 n)
       _mm512_storeu_ps(p->y+i,y1);
       _mm512_storeu_ps(p->z+i,z1);
     }
-    printf("val = %lf\n",p->x[0]); 
+
 }
 
 //
