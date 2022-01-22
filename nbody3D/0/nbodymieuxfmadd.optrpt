@@ -1,0 +1,187 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1] nbodymieuxfmadd.c(151,1)
+  -> INLINE: (153,30) atoll(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (175,3) init(particle_t *, u64)
+  -> (191,7) move_particles(particle_t *, f32, u64)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at nbodymieuxfmadd.c(24,3) inlined into nbodymieuxfmadd.c(175,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:rand(void) (27:21) and call:rand(void) (39:23)
+LOOP END
+
+LOOP BEGIN at nbodymieuxfmadd.c(185,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+nbodymieuxfmadd.c(151,1):remark #34051: REGISTER ALLOCATION : [main] nbodymieuxfmadd.c:151
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   24[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm5 zmm16-zmm19]
+        
+    Routine temporaries
+        Total         :     205
+            Global    :      73
+            Local     :     132
+        Regenerable   :      52
+        Spilled       :      20
+        
+    Routine stack
+        Variables     :       4 bytes*
+            Reads     :       2 [0.00e+00 ~ 0.0%]
+            Writes    :       2 [0.00e+00 ~ 0.0%]
+        Spills        :     160 bytes*
+            Reads     :      25 [1.18e+01 ~ 11.8%]
+            Writes    :      22 [5.49e+00 ~ 5.5%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: move_particles(particle_t *, f32, u64)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (move_particles(particle_t *, f32, u64)) [2] nbodymieuxfmadd.c(45,1)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at nbodymieuxfmadd.c(53,12)
+   remark #25045: Fused Loops: ( 53 62 )
+
+   remark #15301: FUSED LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at nbodymieuxfmadd.c(62,12)
+   remark #25046: Loop lost in Fusion 
+LOOP END
+
+LOOP BEGIN at nbodymieuxfmadd.c(72,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed ANTI dependence between p->vx (83:12) and *(vx+i*4) (122:5)
+
+   LOOP BEGIN at nbodymieuxfmadd.c(88,5)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed ANTI dependence between fx (112:12) and fx (112:12)
+   LOOP END
+LOOP END
+
+LOOP BEGIN at nbodymieuxfmadd.c(128,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed ANTI dependence between p->x (130:12) and *(x1+i*4) (142:7)
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+nbodymieuxfmadd.c(45,1):remark #34051: REGISTER ALLOCATION : [move_particles] nbodymieuxfmadd.c:45
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   26[ rax rdx rcx rbx rsi rdi r8-r11 zmm0-zmm15]
+        
+    Routine temporaries
+        Total         :      62
+            Global    :      33
+            Local     :      29
+        Regenerable   :       3
+        Spilled       :       2
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      40 bytes*
+            Reads     :       2 [8.54e-01 ~ 0.9%]
+            Writes    :       2 [7.09e-01 ~ 0.7%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: init(particle_t *, u64)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (init(particle_t *, u64)) [4] nbodymieuxfmadd.c(23,1)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at nbodymieuxfmadd.c(24,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:rand(void) (27:21) and call:rand(void) (39:23)
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+nbodymieuxfmadd.c(23,1):remark #34051: REGISTER ALLOCATION : [init] nbodymieuxfmadd.c:23
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   19[ rax rdx rcx rbx rbp rsi rdi r8-r15 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :      52
+            Global    :      36
+            Local     :      16
+        Regenerable   :       3
+        Spilled       :      11
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      88 bytes*
+            Reads     :      12 [1.08e+01 ~ 10.8%]
+            Writes    :      11 [5.51e+00 ~ 5.5%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
